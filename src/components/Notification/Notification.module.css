@@ -1,0 +1,10 @@
+.notification {
+  margin-top: 24px;
+  text-align: center;
+
+  font-size: 28px;
+
+  border: 1px solid rgb(197, 195, 195);
+  background-color: rgb(252, 251, 251);
+  border-radius: 20px;
+}

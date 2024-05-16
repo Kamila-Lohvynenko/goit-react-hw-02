@@ -16,13 +16,26 @@ function App() {
   }, [options]);
 
   const totalFeedback = options.good + options.neutral + options.bad;
+  const positiveFeedback = Math.round((options.good / totalFeedback) * 100);
+
+  function updateFeedback(feedbackType) {
+    if (feedbackType === 'reset') {
+      setOptions({ good: 0, neutral: 0, bad: 0 });
+    } else {
+      setOptions({ ...options, [feedbackType]: options[feedbackType] + 1 });
+    }
+  }
 
   return (
     <>
       <Description />
-      <Options values={options} setValues={setOptions} total={totalFeedback} />
+      <Options total={totalFeedback} handleClick={updateFeedback} />
       {totalFeedback > 0 ? (
-        <Feedback values={options} totalFeedback={totalFeedback} />
+        <Feedback
+          values={options}
+          totalFeedback={totalFeedback}
+          positiveFeedback={positiveFeedback}
+        />
       ) : (
         <Notification />
       )}

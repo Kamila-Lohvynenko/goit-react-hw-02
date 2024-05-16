@@ -1,20 +1,13 @@
 import css from './Options.module.css';
 
-const Options = ({ values, setValues, total }) => {
-  function updateFeedback(feedbackType) {
-    if (feedbackType === 'reset') {
-      setValues({ good: 0, neutral: 0, bad: 0 });
-    } else {
-      setValues({ ...values, [feedbackType]: values[feedbackType] + 1 });
-    }
-  }
+const Options = ({ total, handleClick }) => {
   return (
     <ul className={css.list}>
       <li>
         <button
           className={`${css.button} ${css.green}`}
           onClick={() => {
-            updateFeedback('good');
+            handleClick('good');
           }}
         >
           Good
@@ -24,7 +17,7 @@ const Options = ({ values, setValues, total }) => {
         <button
           className={`${css.button} ${css.white}`}
           onClick={() => {
-            updateFeedback('neutral');
+            handleClick('neutral');
           }}
         >
           Neutral
@@ -34,18 +27,18 @@ const Options = ({ values, setValues, total }) => {
         <button
           className={`${css.button} ${css.red}`}
           onClick={() => {
-            updateFeedback('bad');
+            handleClick('bad');
           }}
         >
           Bad
         </button>
       </li>
-      {total && (
+      {total > 0 && (
         <li>
           <button
             className={`${css.button} ${css.gray}`}
             onClick={() => {
-              updateFeedback('reset');
+              handleClick('reset');
             }}
           >
             Reset
